@@ -15,7 +15,7 @@ $ npm i chutils
 ```
 ### Usage
 ```javascript
-const { safeAssign } = require('chutils');
+const {  } = require('chutils');
 var source = {
   package:{
     "name": "chutils",
