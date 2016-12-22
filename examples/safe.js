@@ -1,4 +1,5 @@
-const {safe:{assign, compare}} = require('../lib');
+const path = require('path');
+const {safe:{assign, compare}} = require(path.join(__dirname,'../lib'));
 
 const source = {
   package: {
@@ -21,28 +22,28 @@ var modifiedSource = assign(source, 'class.type.home', {year: 2017})
 
 /*
  {
-  package: {
-    name: 'chutils'
-  },
-  dependencies: {
-    packageName: 'testPackage'
-  },
-  nested: {
-    deep: {
-      property: {
-        value: 'test'
-      }
-    }
-  },
-  class: {
-    type: {
-      home: {
-        year: 2017
-      }
-    }
-  }
-}
-*/
+ package: {
+ name: 'chutils'
+ },
+ dependencies: {
+ packageName: 'testPackage'
+ },
+ nested: {
+ deep: {
+ property: {
+ value: 'test'
+ }
+ }
+ },
+ class: {
+ type: {
+ home: {
+ year: 2017
+ }
+ }
+ }
+ }
+ */
 
 // compares deeply-nested properties that do not exist
 var testCompareFalse = compare(source, 'does.not.exist.property', 'notAProp') // false
