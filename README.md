@@ -5,46 +5,96 @@ Ever find yourself feeling repetitive, a bit of the coding déjà blues? While y
 0.0.5
 
 ### Utility List (thus far)
-1. safeAssign: safely assign nested properties even if it does not exist
-2. de-promisify: unwraps an ES6 Promise to its nostalgic error-first callback form
+1. safe.Assign: safely assign deeply-nested properties even if the intermediary properties do noe exist
+2. safe.Compare: safely compare deeply-nested properties even if the intermediary properties do not exist
+3. de.promisify: unwraps an ES6 Promise to its nostalgic error-first callback form
 
 ### Installation
 Native ES6 Promises is required therefore Node v4.2.4+
 ```sh
 $ npm i chutils
 ```
-### Usage
+### Usage: safeAssign & safeCompare
 ```javascript
-const {  } = require('chutils');
-var source = {
-  package:{
-    "name": "chutils",
-  },
-  dependencies:{
-     "de-promisify": "^0.0.3",  
-  }
+const {safe:{assign, compare}} = require('chutils');
 
+const source = {
+  package: {
+    name: 'chutils',
+  },
+  dependencies: {
+    packageName: 'testPackage'
+  },
+  nested: {
+    deep: {
+      property: {
+        value: 'test'
+      }
+    }
+  }
 }
 
-var modifiedSource = safeAssign(source,'class.type.home',{year:2017})
-console.log('what is modifiedSource', modifiedSource)
-/* 
-{ package: { 
-    name: 'chutils' 
-    },
-    dependencies: { 
-    'de-promisify': '^0.0.3' 
-    },
-    class: { 
-      type: { 
-        home: {
-            year: 2017
-          }
-        } 
-    } 
+// assigns deeply nested properties even if intermediary properties do not exist
+var modifiedSource = assign(source, 'class.type.home', {year: 2017})
+
+/*
+ {
+  package: {
+    name: 'chutils'
+  },
+  dependencies: {
+    packageName: 'testPackage'
+  },
+  nested: {
+    deep: {
+      property: {
+        value: 'test'
+      }
+    }
+  },
+  class: {
+    type: {
+      home: {
+        year: 2017
+      }
+    }
+  }
 }
 */
+
+// compares deeply-nested properties that do not exist
+var testCompareFalse = compare(source, 'does.not.exist.property', 'notAProp') // false
+
+// compares deeply-nested properties
+var testCompareTrue1 = compare(source, `nested.deep.property.value`, 'test'); // true
+
+// compares deeply-nested properties in different Object notations
+var testCompareTrue2 = compare(source, `nested['deep']["property"].value`, 'test'); // true
 ```
+
+### Usage: dePromisify
+```javascript
+const {de:{promisify:de_promisify}} = require('chutils')
+
+const fs = require('fs');
+const path = require('path');
+const bluebird = require('bluebird');
+const readFileAsync = bluebird.promisify(fs.readFile);
+const testAsync = de_promisify(readFileAsync);
+
+testAsync(path.resolve(__dirname, './sample.txt'), 'utf8', function (err, data){
+    if(err) {
+      //do something with this error
+      console.log(`error is: ${err}`);
+    }
+    else {
+      //do something on success
+      console.log(`success: ${data}`);
+    }
+});
+```
+
+
 ### Testing
 ```sh
 $ npm i chutils
