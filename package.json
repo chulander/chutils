@@ -1,0 +1,25 @@
+{
+  "name": "chutils",
+  "version": "0.0.1",
+  "description": "Javascript utility functions to prevent arthritis",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chulander/chutils.git"
+  },
+  "keywords": [
+    "utility",
+    "utilities",
+    "util",
+    "utils"
+  ],
+  "author": "chulander (bryan.chu.info)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chulander/chutils/issues"
+  },
+  "homepage": "https://github.com/chulander/chutils#readme"
+}
