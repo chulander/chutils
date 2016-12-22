@@ -1,8 +1,8 @@
 # chutils
-Ever find yourself feeling repetitive, a bit of the coding déjà blues? While your mind may be momentarily suffering from a relapse, your fingers don't have to with these utility function designed to win back some "me".
+Ever find yourself feeling repetitive, a bit of the coding déjà blues? While your mind may be momentarily suffering from a relapse, your fingers don't have to with these utility function designed to win back some "me" time.
  
 ### Version
-0.0.1
+0.0.2
 
 ### Utilties
 1. freeAssign: worry-free nested property assignment
@@ -21,7 +21,7 @@ var source = {
     "name": "chutils",
   },
   dependencies:{
-     "de-promisify": "^0.0.1",  
+     "de-promisify": "^0.0.3",  
   }
 
 }
@@ -33,7 +33,7 @@ console.log('what is modifiedSource', modifiedSource)
 ### Testing
 ```sh
 $ npm i chutils
-$ cd ./node_modules/de-promisify
+$ cd ./node_modules/chutils
 $ npm i
 $ npm test
 ```
