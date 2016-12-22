@@ -1,8 +1,8 @@
 'use strict';
 
-const freeAssign = require('./lib/freeAssign');
+const safeAssign = require('./lib/safeAssign');
 const de_promisify = require('./lib/de-promisify')
 module.exports = {
-  freeAssign,
+  safeAssign,
   de_promisify,
 }

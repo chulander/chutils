@@ -2,7 +2,7 @@
 Ever find yourself feeling repetitive, a bit of the coding déjà blues? While your mind may be momentarily suffering from a relapse, your fingers don't have to with these utility function designed to win back some "me" time.
  
 ### Version
-0.0.2
+0.0.4
 
 ### Utilties
 1. freeAssign: worry-free nested property assignment
@@ -15,7 +15,7 @@ $ npm i chutils
 ```
 ### Usage
 ```javascript
-const { freeAssign } = require('chutils');
+const { safeAssign } = require('chutils');
 var source = {
   package:{
     "name": "chutils",
@@ -26,9 +26,24 @@ var source = {
 
 }
 
-var modifiedSource = freeAssign(source,'class.type.home',{year:2017})
+var modifiedSource = safeAssign(source,'class.type.home',{year:2017})
 console.log('what is modifiedSource', modifiedSource)
-
+/* 
+{ package: { 
+    name: 'chutils' 
+    },
+    dependencies: { 
+    'de-promisify': '^0.0.3' 
+    },
+    class: { 
+      type: { 
+        home: {
+            year: 2017
+          }
+        } 
+    } 
+}
+*/
 ```
 ### Testing
 ```sh
