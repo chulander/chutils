@@ -15,7 +15,7 @@ Native ES6 Promises is required therefore Node v4.2.4+
 ```sh
 $ npm i chutils
 ```
-### Usage: (safely) assign, compare, and get
+### Usage: (safe) assign, compare, and get
 ```javascript
 const {safe:{assign, compare, get}} = require('chutils');
 
@@ -80,7 +80,7 @@ var value2 = get(source, `nested['deep']["property"].value`); // test
 
 ```
 
-### Usage: dePromisify
+### Usage: (de) promisify
 ```javascript
 const {de:{promisify:de_promisify}} = require('chutils')
 
