@@ -16,7 +16,7 @@ $ npm i chutils
 ```
 ### Usage: safeAssign & safeCompare
 ```javascript
-const {safe:{assign, compare}} = require('chutils');
+const {safe:{assign, compare, get}} = require('chutils');
 
 const source = {
   package: {
@@ -70,6 +70,13 @@ var testCompareTrue1 = compare(source, `nested.deep.property.value`, 'test'); //
 
 // compares deeply-nested properties in different Object notations
 var testCompareTrue2 = compare(source, `nested['deep']["property"].value`, 'test'); // true
+
+// gets the deeply-nested property value
+var value1 = get(source, `nested.deep.property.value`); // test
+
+// gets the deeply-nested property value in different Object notations
+var value2 = get(source, `nested['deep']["property"].value`); // test
+
 ```
 
 ### Usage: dePromisify
