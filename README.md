@@ -15,7 +15,7 @@ $ npm i chutils
 ```
 ### Usage
 ```javascript
-const {freeAssign } = require('chutils');
+const { freeAssign } = require('chutils');
 var source = {
   package:{
     "name": "chutils",

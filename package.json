@@ -1,6 +1,6 @@
 {
   "name": "chutils",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Javascript utility functions to prevent arthritis",
   "main": "index.js",
   "scripts": {
