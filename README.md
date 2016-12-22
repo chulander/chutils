@@ -4,8 +4,8 @@ Ever find yourself feeling repetitive, a bit of the coding déjà blues? While y
 ### Version
 0.0.4
 
-### Utilties
-1. freeAssign: worry-free nested property assignment
+### Utility List (thus far)
+1. safeAssign: safely assign nested properties even if it does not exist
 2. de-promisify: unwraps an ES6 Promise to its nostalgic error-first callback form
 
 ### Installation
