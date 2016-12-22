@@ -2,19 +2,20 @@
 Ever find yourself feeling repetitive, a bit of the coding déjà blues? While your mind may be momentarily suffering from a relapse, your fingers don't have to with these utility function designed to win back some "me" time.
  
 ### Version
-0.1.1
+0.1.4
 
 ### Utility List (thus far)
-1. safe.assign: safely assign deeply-nested properties even if the intermediary properties do noe exist
+1. safe.assign: safely assign deeply-nested properties even if the intermediary properties do not exist
 2. safe.compare: safely compare deeply-nested properties even if the intermediary properties do not exist
-3. de.promisify: unwraps an ES6 Promise to its nostalgic error-first callback form
+3. safe.get: safely get deeply-nested property values even if the intermediary properties does not exist
+4. de.promisify: unwraps an ES6 Promise to its nostalgic error-first callback form
 
 ### Installation
 Native ES6 Promises is required therefore Node v4.2.4+
 ```sh
 $ npm i chutils
 ```
-### Usage: safeAssign & safeCompare
+### Usage: (safely) assign, compare, and get
 ```javascript
 const {safe:{assign, compare, get}} = require('chutils');
 
