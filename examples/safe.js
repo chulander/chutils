@@ -1,5 +1,5 @@
 const path = require('path');
-const {safe:{assign, compare}} = require(path.join(__dirname,'../lib'));
+const {safe:{assign, compare}} = require(path.join(__dirname,'..','./lib/index.js'));
 
 const source = {
   package: {
