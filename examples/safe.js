@@ -22,26 +22,26 @@ var modifiedSource = assign(source, 'class.type.home', {year: 2017})
 
 /*
  {
- package: {
- name: 'chutils'
- },
- dependencies: {
- packageName: 'testPackage'
- },
- nested: {
- deep: {
- property: {
- value: 'test'
- }
- }
- },
- class: {
- type: {
- home: {
- year: 2017
- }
- }
- }
+   package: {
+    name: 'chutils'
+   },
+   dependencies: {
+    packageName: 'testPackage'
+   },
+   nested: {
+    deep: {
+      property: {
+        value: 'test'
+      }
+    }
+   },
+   class: {
+    type: {
+      home: {
+        year: 2017
+      }
+    }
+   }
  }
  */
 
