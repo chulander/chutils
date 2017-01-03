@@ -40,7 +40,12 @@ describe('safe', function (){
     it('Expects the nested property to be added', () =>{
       const deepProp = 'my.new.prop'
       const newObj = assign(source, deepProp, 'newProp');
-      expect(newObj).to.have.deep.property(deepProp)
+      expect(newObj).to.have.deep.property(`${deepProp}`,'newProp')
+    })
+    it('Expects the nested property to be added even if property is an object', () =>{
+      const deepProp = 'my.new.objectProp'
+      const newObj = assign(source, deepProp, {value:'objectProp'});
+      expect(newObj).to.have.deep.property(`${deepProp}.value`,'objectProp')
     })
     it('Expects the nested property to be added with the correct value', () =>{
       const deepProp = 'my.new.prop'
@@ -111,6 +116,13 @@ describe('safe', function (){
     });
     it('Expects the nested property value if it exists', () =>{
       expect(get(source, 'nested.deep.property.value')).to.equal('test');
+    })
+    it('Expects the nested property to have its own properties if it exists', () =>{
+      // expect(get(source, 'nested.deep.property')).to.have.deep.property('source.nested.deep.property.value','test');
+      expect(get(source, 'nested.deep.property')).to.be.an('object');
+      expect(get(source, 'nested.deep.property')).to.have.property('value');
+      expect(get(source, 'nested.deep.property')['value']).equal('test');
+
     })
     it(`Expects the nested property value even if the argument "assignment" contains [,],", or ' object property notations`, () =>{
       expect(get(source, `nested['deep']["property"].value`)).equal('test');
