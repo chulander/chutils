@@ -46,9 +46,7 @@ var modifiedSource = assign(source, 'class.type.home', { year: 2017 })
  }
  }
  */
-var req = {};
-var testSafeAssign = assign(req, 'controllerData["sorCustomer"]', { name: 'bryan' })
-console.log('what is testSafeAssign', testSafeAssign);
+
 // compares deeply-nested properties that do not exist
 var testCompareFalse = compare(source, 'does.not.exist.property', 'notAProp') // false
 
