@@ -1,5 +1,7 @@
+'use strict';
+
 const path = require('path');
-const {safe:{assign, compare, get}} = require(path.join(__dirname,'..','./lib/index.js'));
+const { safe:{ assign, compare, get, } } = require(path.join(__dirname, '..', './lib/index.js'));
 
 const source = {
   package: {
@@ -18,33 +20,35 @@ const source = {
 }
 
 // assigns deeply nested properties even if intermediary properties do not exist
-var modifiedSource = assign(source, 'class.type.home', {year: 2017})
+var modifiedSource = assign(source, 'class.type.home', { year: 2017 })
 
 /*
  {
-   package: {
-    name: 'chutils'
-   },
-   dependencies: {
-    packageName: 'testPackage'
-   },
-   nested: {
-    deep: {
-      property: {
-        value: 'test'
-      }
-    }
-   },
-   class: {
-    type: {
-      home: {
-        year: 2017
-      }
-    }
-   }
+ package: {
+ name: 'chutils'
+ },
+ dependencies: {
+ packageName: 'testPackage'
+ },
+ nested: {
+ deep: {
+ property: {
+ value: 'test'
+ }
+ }
+ },
+ class: {
+ type: {
+ home: {
+ year: 2017
+ }
+ }
+ }
  }
  */
-
+var req = {};
+var testSafeAssign = assign(req, 'controllerData["sorCustomer"]', { name: 'bryan' })
+console.log('what is testSafeAssign', testSafeAssign);
 // compares deeply-nested properties that do not exist
 var testCompareFalse = compare(source, 'does.not.exist.property', 'notAProp') // false
 
@@ -58,4 +62,7 @@ var testCompareTrue2 = compare(source, `nested['deep']["property"].value`, 'test
 var value1 = get(source, `nested.deep.property.value`); // test
 
 // gets the deeply-nested property value in different Object notations
-var value2 = get(source, `nested['deep']["property"].value`); // test
+var value2 = get(source, `nested['deep'][property].value`); // test
+console.log('value2', value2)
+// gets the deeply-nested property value of undefined if deeply-nested property does not exists
+var value3 = get(source, `nested.deep.property.value.missing`); // undefined

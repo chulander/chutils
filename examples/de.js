@@ -1,61 +1,57 @@
+'use strict';
+const fs = require('fs');
 const path = require('path');
-const {deep:{assign}} = require(path.join(__dirname,'..','./lib/index.js'));
 
-const source = {
-  package: {
-    name: 'chutils',
-  },
-  dependencies: {
-    packageName: 'testPackage'
-  },
-  nested: {
-    deep: {
-      property: {
-        value: 'test'
-      }
-    }
+const {de:{promisify:de_promisify}} = require(path.join(__dirname, '..', './lib/index.js'));
+
+const bluebird = require('bluebird');
+const readFileAsync = bluebird.promisify(fs.readFile);
+const testAsync = de_promisify(readFileAsync);
+const testFile = path.resolve(__dirname, '../test/sample.txt');
+const testErrorFile =path.resolve(__dirname, '../test/doesNotExist.txt');
+
+// Successful File Read
+
+// Promise Version
+readFileAsync(testFile)
+.then(file=>{
+  console.log('promise success: file contexts are - ', file.toString());
+})
+.catch(err=>{
+  console.log('promise error: error is - ', err);
+})
+
+// Callback Version
+testAsync(testFile, function (err, file){
+  if(err) {
+    //do something with this error
+    console.log('callback error: error is - ', err);
   }
-}
+  else {
+    //do something on success
+    console.log('callback success: file contexts are - ', file.toString());
+  }
+});
 
-// deeply nested properties even if intermediary properties do not exist
-var modifiedSource = assign(source, 'class.type.home', {year: 2017})
+// Error File Read
 
-/*
- {
- package: {
- name: 'chutils'
- },
- dependencies: {
- packageName: 'testPackage'
- },
- nested: {
- deep: {
- property: {
- value: 'test'
- }
- }
- },
- class: {
- type: {
- home: {
- year: 2017
- }
- }
- }
- }
- */
+// Promise Version
+readFileAsync(testErrorFile)
+.then(file=>{
+  console.log('promise success: file contexts are - ', file)
+})
+.catch(err=>{
+  console.log('promise error: error is - ', err);
+})
 
-// compares deeply-nested properties that do not exist
-var testCompareFalse = compare(source, 'does.not.exist.property', 'notAProp') // false
-
-// compares deeply-nested properties
-var testCompareTrue1 = compare(source, `nested.deep.property.value`, 'test'); // true
-
-// compares deeply-nested properties in different Object notations
-var testCompareTrue2 = compare(source, `nested['deep']["property"].value`, 'test'); // true
-
-// gets the deeply-nested property value
-var value1 = get(source, `nested.deep.property.value`); // test
-
-// gets the deeply-nested property value in different Object notations
-var value2 = get(source, `nested['deep']["property"].value`); // test
+// Callback Version
+testAsync(testErrorFile, function (err, file){
+  if(err) {
+    //do something with this error
+    console.log('callback error: error is - ', err);
+  }
+  else {
+    //do something on success
+    console.log('callback success: file contexts are - ', file.toString())
+  }
+});
