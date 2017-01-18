@@ -21,11 +21,12 @@
   "bugs": {
     "url": "https://github.com/chulander/chutils/issues"
   },
-  "readmeFilename":"README.md",
+  "readmeFilename": "README.md",
   "homepage": "https://github.com/chulander/chutils#readme",
   "devDependencies": {
     "bluebird": "^3.4.6",
     "chai": "^3.5.0",
-    "mocha": "^3.2.0"
+    "mocha": "^3.2.0",
+    "promisie": "^1.5.3"
   }
 }

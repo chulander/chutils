@@ -4,8 +4,9 @@ require('mocha');
 const path = require('path');
 const chai = require('chai');
 const expect = chai.expect;
+const fs = require('fs');
 const { type:{ is } } = require(path.resolve(__dirname, '../lib'));
-
+const Promisie = require('Promisie');
 
 describe('type', function () {
   // basic types are
@@ -71,7 +72,7 @@ describe('type', function () {
       })
     })
     describe('handles ES6 Promise', () => {
-      it(`expects Promise to return "promise"`, ()=>{
+      it(`expects new Promise((success=>{},error=>{})) to return "promise"`, ()=>{
         const promise = new Promise((success=>{},error=>{}))
         expect(is(promise)).to.equal('promise')
       })
@@ -84,6 +85,12 @@ describe('type', function () {
         const testJSON = JSON.stringify(testObj);
 
         expect(is(testJSON)).to.equal('json')
+      })
+      it(`expects {package:'chutils'} to return "object" and not JSON`, ()=>{
+        const testObj = {
+          package:'chutils'
+        };
+        expect(is(testObj)).to.equal('object')
       })
     })
   });
