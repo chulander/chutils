@@ -65,10 +65,25 @@ describe('type', function () {
         expect(is([1,2,3])).to.equal('array')
       })
     })
-    describe('handles regular expressions in / / format', () => {
+    describe('handles regular expressions in /regexPattern/ format', () => {
       it(`expects /hello/i to return "regexp"`, ()=>{
         expect(is(/hello/i)).to.equal('regexp')
+      })
+    })
+    describe('handles ES6 Promise', () => {
+      it(`expects Promise to return "promise"`, ()=>{
+        const promise = new Promise((success=>{},error=>{}))
+        expect(is(promise)).to.equal('promise')
+      })
+    })
+    describe('handles JSON', () => {
+      it(`expects JSON to return "json"`, ()=>{
+        const testObj = {
+          package:'chutils'
+        };
+        const testJSON = JSON.stringify(testObj);
 
+        expect(is(testJSON)).to.equal('json')
       })
     })
   });
