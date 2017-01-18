@@ -55,14 +55,20 @@ describe('type', function () {
         expect(is({})).to.equal('object')
       })
     })
-    describe('handle null', () => {
+    describe('handles null', () => {
       it(`expects null to return "null"`, ()=>{
         expect(is(null)).to.equal('null')
       })
     })
-    describe('handle array', () => {
+    describe('handles array', () => {
       it(`expects [1, 2, 3] to return "array"`, ()=>{
         expect(is([1,2,3])).to.equal('array')
+      })
+    })
+    describe('handles regular expressions in / / format', () => {
+      it(`expects /hello/i to return "regexp"`, ()=>{
+        expect(is(/hello/i)).to.equal('regexp')
+
       })
     })
   });

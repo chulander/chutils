@@ -8,7 +8,7 @@ Ever find yourself feeling repetitive, a bit of the coding déjà blues? While y
 1. safe.assign: safely assign deeply-nested properties even if the intermediary properties do not exist
 2. safe.compare: safely compare deeply-nested properties even if the intermediary properties do not exist
 3. safe.get: safely get deeply-nested property values even if the intermediary properties does not exist
-4. type.is: get the "working" typeof a variable which really means null will return "null" and [] will return "array"
+4. type.is: get the "working" typeof a variable which really means null returns "null", [] returns "array", /hello/i returns "regexp". Thanks to [Angus](https://javascriptweblog.wordpress.com/2011/08/08/fixing-the-javascript-typeof-operator/)
 5. de.promisify: unwraps an ES6 Promise to its nostalgic error-first callback form
 
 ### Installation
