@@ -31,7 +31,8 @@ var source = {
 const newObj2 = assign(source, 'nested.deep.property.test', 'newBryan');
 // const newObj2 = assign(source, 'just.test', 'newBryan');
 // const newObj2 = assign(source, 'just.test', {value:'newBryan'});
-console.log('newObj2', newObj2.nested)
+
+console.log('newObj2', newObj2)
 /*
  modifiedSource { package: { name: 'chutils' },
  dependencies: { packageName: 'testPackage' },
