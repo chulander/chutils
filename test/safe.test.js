@@ -4,7 +4,16 @@ require('mocha');
 const path = require('path');
 const chai = require('chai');
 const expect = chai.expect;
-const { safe:{ assign, compare, get } } = require(path.resolve(__dirname, '../lib'));
+const {
+  safe:{
+    assign,
+    compare,
+    get
+  },
+  type: {
+    is
+  }
+} = require(path.resolve(__dirname, '../lib'));
 const fs = require('fs');
 const bluebird = require('bluebird');
 
@@ -193,11 +202,11 @@ describe('safe', function () {
   })
   describe('compare', () => {
     it('Expects to be a function', () => {
-      expect(typeof compare === 'function').to.be.true;
+      expect(typeof compare() === 'function').to.be.true;
     });
     it('Expects a TypeError when invoked with argument "object" that is not an Object', () => {
       try {
-        compare(null, 'deep.property.check', 'anything')
+        compare()(null, 'deep.property.check', 'anything')
       }
       catch ( e ) {
         expect(e instanceof TypeError).to.be.true;
@@ -205,7 +214,7 @@ describe('safe', function () {
     });
     it('Expects a TypeError when invoked with argument "assignment" that is not an String', () => {
       try {
-        compare(source, null, 'anything')
+        compare()(source, null, 'anything')
       }
       catch ( e ) {
         expect(e instanceof TypeError).to.be.true;
@@ -213,23 +222,34 @@ describe('safe', function () {
     });
     it('Expects a TypeError when invoked with argument "val" that is not an primitive', () => {
       try {
-        compare(source, 'deep.property.check', { name: 'anything' })
+        compare()(source, 'deep.property.check', { name: 'anything' })
       }
       catch ( e ) {
         expect(e instanceof TypeError).to.be.true;
       }
     });
     it('Expects true if the nested property value equals the expected value', () => {
-      expect(compare(source, 'nested.deep.property.value', 'test')).to.be.true
+      expect(compare()(source, 'nested.deep.property.value', 'test')).to.be.true
     })
     it(`Expects true if the nested property value equals the expected value even if the argument "assignment" contains [,],", or ' object property notations`, () => {
-      expect(compare(source, `nested['deep']["property"].value`, 'test')).to.be.true
+      expect(compare()(source, `nested['deep']["property"].value`, 'test')).to.be.true
     })
     it('Expects false if the nested property value do not equal the expected property value', () => {
-      expect(compare(source, 'nested.deep.property.value', 'falseyValue')).to.be.false
+      expect(compare()(source, 'nested.deep.property.value', 'falseyValue')).to.be.false
     })
     it('Expects false if nested property do not exist', () => {
-      expect(compare(source, 'does.not.exist.property', 'test')).to.be.false
+      expect(compare()(source, 'does.not.exist.property', 'test')).to.be.false
+    })
+    describe('compareEngine', ()=>{
+      it('Expects type to be a "string"', () => {
+        const testObj = assign(source, 'nested.deep.property.value', 'test');
+        expect(compare(is)(testObj, 'nested.deep.property.value', 'string')).to.be.true;
+      })
+      it('Expects type to be a "null"', () => {
+        const testObj = assign(source, 'nested.deep.property.value', null);
+        expect(compare(is)(testObj, 'nested.deep.property.value', 'null')).to.be.true;
+      })
+
     })
   })
   describe('get', () => {

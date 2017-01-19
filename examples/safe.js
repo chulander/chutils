@@ -51,13 +51,13 @@ console.log('newObj2', newObj2)
 
 
 // compares deeply-nested properties that do not exist
-var testCompareFalse = compare(source, 'does.not.exist.property', 'notAProp') // false
+var testCompareFalse = compare()(source, 'does.not.exist.property', 'notAProp') // false
 
 // compares deeply-nested properties
-var testCompareTrue1 = compare(source, `nested.deep.property.value`, 'test'); // true
+var testCompareTrue1 = compare()(source, `nested.deep.property.value`, 'test'); // true
 
 // compares deeply-nested properties in different Object notations
-var testCompareTrue2 = compare(source, `nested['deep']["property"].value`, 'test'); // true
+var testCompareTrue2 = compare()(source, `nested['deep']["property"].value`, 'test'); // true
 
 // gets the deeply-nested property value
 var value1 = get(source, `nested.deep.property.value`); // test
