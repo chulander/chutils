@@ -1,7 +1,9 @@
 'use strict';
 
-const cleanDotNotation = (str)=> str.replace(/\[|]/g,'.').replace(/\.{2}/g,'.').replace(/'|"|\.$/g,'')
+const helper = require('./helper');
+const base = require('./base');
 
 module.exports = {
-  cleanDotNotation
+  helper,
+  base
 }
