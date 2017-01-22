@@ -25,7 +25,7 @@ const baseObject = function () {
     variables: function ( obj, assignment, val ) {
       const valueIsObject = val && typeof val === 'object' && !Array.isArray(val);
       const props = helper.cleanDotNotation(assignment).split('.')
-      const prop = props.shift();
+      let prop = props.shift();
       const propIsObject = obj[prop] && typeof obj[prop] === 'object' && !Array.isArray(obj[prop])
       const isFinalCall = props.length === 0;
       const objectKeyValue = obj[prop];
