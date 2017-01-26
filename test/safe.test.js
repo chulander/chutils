@@ -46,9 +46,30 @@ describe('safe', function () {
       },
     }
   }
-  const rootLayer = 'nested';
-  const propFirstLayer = `${rootLayer}.first_layer`;
-  const propSecondLayer = `${propFirstLayer}.second_layer`;
+  const _root = 'nested';
+  const _primitive = 'primitive';
+  const _object = 'obj';
+  const _array = 'arr';
+  const _first_layer = 'first_layer';
+  const _second_layer = 'second_layer';
+  const createNestedProps = ( ...args ) => args.map(item => item).join('.')
+
+  const first_layer_prop_primitive = createNestedProps(_root, _first_layer, _primitive);
+  const first_layer_prop_array = createNestedProps(_root, _first_layer, _array);
+  const first_layer_prop_object = createNestedProps(_root, _first_layer, _object);
+  const first_layer_prop_object_prop_primitive = createNestedProps(_root, _first_layer, _object, _primitive);
+  const first_layer_prop_object_prop_array = createNestedProps(_root, _first_layer, _object, _array);
+  const first_layer = createNestedProps(_root, _first_layer);
+
+  const second_layer_prop_primitive = createNestedProps(_root, _first_layer, _second_layer, _primitive);
+  const second_layer_prop_array = createNestedProps(_root, _first_layer, _second_layer, _array);
+  const second_layer_prop_object = createNestedProps(_root, _first_layer, _second_layer, _object);
+  const second_layer_prop_object_prop_primitive = createNestedProps(_root, _first_layer, _second_layer, _object, _primitive);
+  const second_layer_prop_object_prop_array = createNestedProps(_root, _first_layer, _second_layer, _object, _array);
+  const second_layer_prop_number_as_key = createNestedProps(_root, _first_layer, _second_layer, '0');
+
+  const propFirstLayer = createNestedProps(_root,_first_layer);
+  const propSecondLayer = createNestedProps(_root,_first_layer,_second_layer);
 
 
   describe('assign', () => {
@@ -268,28 +289,6 @@ describe('safe', function () {
 
   })
   describe('get', () => {
-    const _root = 'nested';
-    const _primitive = 'primitive';
-    const _object = 'obj';
-    const _array = 'arr';
-    const _first_layer = 'first_layer';
-    const _second_layer = 'second_layer';
-    const createNestedProps = ( ...args ) => args.map(item => item).join('.')
-
-    const first_layer_prop_primitive = createNestedProps(_root, _first_layer, _primitive);
-    const first_layer_prop_array = createNestedProps(_root, _first_layer, _array);
-    const first_layer_prop_object = createNestedProps(_root, _first_layer, _object);
-    const first_layer_prop_object_prop_primitive = createNestedProps(_root, _first_layer, _object, _primitive);
-    const first_layer_prop_object_prop_array = createNestedProps(_root, _first_layer, _object, _array);
-    const first_layer = createNestedProps(_root, _first_layer);
-
-    const second_layer_prop_primitive = createNestedProps(_root, _first_layer, _second_layer, _primitive);
-    const second_layer_prop_array = createNestedProps(_root, _first_layer, _second_layer, _array);
-    const second_layer_prop_object = createNestedProps(_root, _first_layer, _second_layer, _object);
-    const second_layer_prop_object_prop_primitive = createNestedProps(_root, _first_layer, _second_layer, _object, _primitive);
-    const second_layer_prop_object_prop_array = createNestedProps(_root, _first_layer, _second_layer, _object, _array);
-    const second_layer_prop_number_as_key = createNestedProps(_root, _first_layer, _second_layer, '0');
-
 
     it('Expects to be a function', () => {
       expect(typeof get === 'function').to.be.true;
