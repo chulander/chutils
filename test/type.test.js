@@ -77,6 +77,12 @@ describe('type', function () {
         expect(is(promise)).to.equal('promise')
       })
     })
+    describe('handles functions',()=>{
+      it(`expects function to return "function"`,()=>{})
+      const testFunc = function(){
+        expect(is(testFunc)).to.equal('function')
+      }
+    })
     describe('handles JSON', () => {
       it(`expects JSON to return "json"`, ()=>{
         const testObj = {

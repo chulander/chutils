@@ -242,10 +242,10 @@ describe('safe', function () {
       }
     });
     it('Expects true if the nested property value equals the expected value', () => {
-      expect(valueCompare(source, 'nested.deep.property.value', 'test')).to.be.true
+      expect(valueCompare(source, 'nested.first_layer.second_layer.primitive', 'second_layer_primitive')).to.be.true
     })
     it(`Expects true if the nested property value equals the expected value even if the argument "assignment" contains [,],", or ' object property notations`, () => {
-      expect(valueCompare(source, `nested['deep']["property"].value`, 'test')).to.be.true
+      expect(valueCompare(source, `nested['first_layer']["second_layer"].primitive`, 'second_layer_primitive')).to.be.true
     })
     it('Expects false if the nested property value do not equal the expected property value', () => {
       expect(valueCompare(source, 'nested.deep.property.value', 'falseyValue')).to.be.false
