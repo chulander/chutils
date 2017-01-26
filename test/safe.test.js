@@ -175,28 +175,40 @@ describe('safe', function () {
         const deepProp = `${propFirstLayer}.arr`;
         const arrayLength = get(source, `${deepProp}`).length;
         describe('existing property is an array', () => {
-          let newTestObj;
-          let newTestPrimitive;
+          let testElementObj;
+          let testElementPrimitive;
+          let testElementArray;
           before(() => {
-            console.log('what is deepProp', deepProp);
-            newTestObj = assign(source, deepProp, propObj);
-            newTestPrimitive = assign(source, deepProp, propValue);
+            testElementObj = assign(source, deepProp, propObj);
+            testElementPrimitive = assign(source, deepProp, propValue);
+            testElementArray = assign(source, deepProp,[propObj]);
           })
-          it('Expects the array length to increase after nested object is assigned', () => {
-            const newArrayLength = get(newTestObj, `${deepProp}`).length;
+          it('Expects the array length to increase after element object is assigned', () => {
+            const newArrayLength = get(testElementObj, `${deepProp}`).length;
             expect(newArrayLength - arrayLength).to.equal(1);
           })
           it('Expects the last element of the array to be the correct object ', () => {
-            const testArrayElement = get(newTestObj, `${deepProp}`).pop();
+            const testArrayElement = get(testElementObj, `${deepProp}`).pop();
+            expect(testArrayElement).to.be.an('object');
             expect(testArrayElement).to.have.deep.property(`${Object.keys(propObj)[0]}`, propValue)
           })
-          it('expects the array length to increase after nested primitive value is assigned', () => {
-            const newArrayLength = get(newTestPrimitive, `${deepProp}`).length;;
+          it('expects the array length to increase after element primitive value is assigned', () => {
+            const newArrayLength = get(testElementPrimitive, `${deepProp}`).length;;
             expect(newArrayLength - arrayLength).to.equal(1);
           })
           it('Expects the last element of the array to be the correct primitive value ', () => {
-            const testArrayElement = get(newTestPrimitive, `${deepProp}`).pop();
+            const testArrayElement = get(testElementPrimitive, `${deepProp}`).pop();
+            expect(testArrayElement).to.be.an('string');
             expect(testArrayElement).to.equal(propValue)
+          })
+          it('expects the array length to increase after element array is assigned', () => {
+            const newArrayLength = get(testElementArray, `${deepProp}`).length;;
+            expect(newArrayLength - arrayLength).to.equal(1);
+          })
+          it('Expects the last element of the array to be the element array', () => {
+            const testArrayElement = get(testElementArray, `${deepProp}`).pop();
+            expect(testArrayElement).to.be.an('array');
+            expect(testArrayElement[0][Object.keys(propObj)[0]]).to.equal(propValue)
           })
         })
       })
