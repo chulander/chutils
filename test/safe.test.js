@@ -123,7 +123,6 @@ describe('safe', function () {
               expect(newObj.nested.first_layer.deepProp).to.equal(propValue)
             })
             it('Expects nested property along the path to still exist', () => {
-              console.log('what is newObj', newObj);
               expect(newObj).to.have.deep.property('nested.first_layer.arr')
             })
             it('Expects nested property value along the path to still exist', () => {
@@ -150,7 +149,7 @@ describe('safe', function () {
         describe('property level: first_layer', () => {
           it('Expects adding a primitive value to result in an error', () => {
             try {
-              assign(source, propFirstLayer, propObj);
+              assign(source, propFirstLayer, propValue);
             }
             catch ( e ) {
               expect(e instanceof Error).to.be.true;
@@ -159,6 +158,14 @@ describe('safe', function () {
           it('Expects adding a object to result in an error', () => {
             try {
               assign(source, propFirstLayer, propObj);
+            }
+            catch ( e ) {
+              expect(e instanceof Error).to.be.true;
+            }
+          })
+          it('Expects adding a deep object to result in an error', () => {
+            try {
+              assign(source, propSecondLayer, propObj);
             }
             catch ( e ) {
               expect(e instanceof Error).to.be.true;
@@ -367,7 +374,6 @@ describe('safe', function () {
           expect(get(source, notations_second_layer_object)).to.have.property(_primitive, `${_second_layer}_object_${_primitive}`);
         })
         it(`Expects .dot notation using numbers to be handled`, () => {
-          console.log('what is second_layer_prop_number_as_key', second_layer_prop_number_as_key)
           expect(get(source, second_layer_prop_number_as_key)).to.equal('primitive_number_as_key')
         })
       })
