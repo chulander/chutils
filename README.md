@@ -10,7 +10,8 @@ Ever find yourself feeling repetitive, a bit of the coding déjà blues? While y
 3. safe.valueCompare: safely compare deeply-nested properties
 4. safe.typeCompare: safely compare deeply-nested properties' data types and/or subtypes 
 5. type.is: get the "working" typeof a variable which really means null returns "null", [] returns "array", /hello/i returns "regexp". Thanks to [Angus](https://javascriptweblog.wordpress.com/2011/08/08/fixing-the-javascript-typeof-operator/)
-6. de.promisify: unwraps an ES6 Promise to its nostalgic error-first callback form
+6. async.de_promisify: unwraps an ES6 Promise to its nostalgic error-first callback form
+7. async.promisify: wraps an error-first callback function into an ES6 Promise
 
 ### Installation
 Native ES6 Promises is required therefore Node v4.2.4+
@@ -95,9 +96,9 @@ console.log(is[1,2,3]) // "array"
 
 ```
 
-### Usage: (de) promisify
+### Usage: (async) de_promisify
 ```javascript
-const {de:{promisify:de_promisify}} = require('chutils')
+const {async:{de_promisify}} = require('chutils')
 
 const path = require('path');
 const bluebird = require('bluebird');
