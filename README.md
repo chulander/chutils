@@ -108,21 +108,58 @@ const obj = {
 shouldBe(obj, 'deeply.nested["arr"]','array') // true
 shouldBe(obj, 'promiseObj', 'promise') // true
 ```
+
 #### async
-1. dePromisify
-2. promisify
-3. promisifyAll
+1. dePromisify: unwraps an ES6 Promise to its nostalgic error-first callback form
+```javascript
+const { async: { dePromisify } } = require('chutils')
+const bluebird = require('bluebird')
 
-2. get: safely get deeply-nested object[key] values
+const fs = require('fs')
+const readFileAsync = bluebird.promisify(fs.readFile)
+const readFileCB = dePromisify(readFileAsync)
+readFileCB('someText.txt', function(err,data){
+  if(err) err
+  else console.log(data) // some data here
+})
 
-#### compare
-1. value: safely compare deeply-nested value
-2. shouldBe: safely compare 
-3. safe.valueCompare: safely compare deeply-nested properties
-4. safe.typeCompare: safely compare deeply-nested properties' data types and/or subtypes 
-5. type.is: 
-6. async.de_promisify: unwraps an ES6 Promise to its nostalgic error-first callback form
-7. async.promisify: wraps an error-first callback function into an ES6 Promise
+````
+2. dePromisifyAll: iterates through an object's enumerable properties and dePromisifies the functions
+```javascript
+const { async: { dePromisifyAll } } = require('chutils')
+const bluebird = require('bluebird')
+
+let fs = bluebird.promisifyAll(require('fs'))
+fs = dePromisifyAll(fs)
+
+fs.readFileCB('someText.txt', function(err,data){
+  if(err) err
+  else console.log(data) // some data here
+})
+```
+3. promisify: wraps an error-first callback function into an ES6 Promise
+```javascript
+const { async: { promisify } } = require('chutils')
+const fs = require('fs')
+
+const readFileAsync = promisify(fs.readFile)
+readFileAsync('someText.txt')
+.then(data=>{
+  console.log(data) // some data here
+})
+
+```
+4. promisifyAll: iterates through an object's enumerable properties and promisifies the functions
+```javascript
+const { async: { promisifyAll } } = require('chutils')
+const fs = promisifyAll(require('fs'))
+
+fs.readFileAsync('someText.txt')
+.then(data=>{
+  console.log(data) // some data here
+})
+
+```
 
 ### Installation
 Native ES6 Promises is required therefore Node v4.2.4+

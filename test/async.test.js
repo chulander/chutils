@@ -25,6 +25,7 @@ describe('dePromisify', function () {
     fs.readFile(path.resolve(__dirname, './sample.txt'), 'utf8', function (err, data) {
       if (err) done(err)
       else {
+        console.log('what is data,', data)
         successData = data
         done()
       }
