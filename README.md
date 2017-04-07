@@ -2,7 +2,7 @@
 Ever find yourself feeling repetitive, a bit of the coding déjà blues? While your mind may be momentarily suffering from a relapse, your fingers don't have to with these utility function designed to win back some "me" time.
  
 ### Version
-1.0.0
+2.0.0
 
 ### Utility List (thus far)
 1. safe.assign: safely assign deeply-nested properties
