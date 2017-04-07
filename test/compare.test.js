@@ -19,7 +19,7 @@ const {
 const fs = require('fs')
 const bluebird = require('bluebird')
 const {test: {getSource}} = require(path.join(__dirname, '../utility'))
-const source=getSource()
+const source = getSource()
 describe('compare', function () {
   const _root = 'nested'
   const _primitive = 'primitive'
@@ -93,8 +93,8 @@ describe('compare', function () {
       const testObj = assign(source, deepProp, null)
       expect(shouldBe(testObj, deepProp, 'null')).to.be.true
     })
-    it('Expects type to be a Promise', ()=>{
-      expect(shouldBe(source,`${secondLayerPropObject}.promiseObj`,'promise'))
+    it('Expects type to be a Promise', () => {
+      expect(shouldBe(source, `${secondLayerPropObject}.promiseObj`, 'promise'))
     })
   })
 })
